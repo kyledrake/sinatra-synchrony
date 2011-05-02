@@ -106,4 +106,4 @@ Thanks
 * [Ilya Grigorik](http://www.igvita.com) and [PostRank](http://www.postrank.com) for their amazing work on em-synchrony, em-http-request, and countless articles explaining this.
 * [Mike Perham](http://www.mikeperham.com) and [Carbon Five](http://carbonfive.com). For rack-fiber_pool, em-resolv-replace, and many blog posts and presentations on this.
 * [Konstantin Haase](http://rkh.im/) for async-rack and his many contributions to Sinatra.
-* The many developers that helped Sinatra and EventMachine become a real force for concurrent programming.
+* The many Sinatra developers that liberated me from framework hell, and EventMachine developers that liberated me from blocking IO hell.
