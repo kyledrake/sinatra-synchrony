@@ -44,7 +44,7 @@ One important thing: __do not use Sinatra's internal session code__. So no "enab
 Tests
 ---
 
-Just write your tests as usual, my Rack::Test patch fixes the "outside of EventMachine" errors. You must be in the __test__ environment so that Sinatra will not load Rack::FiberPool.
+Just write your tests as usual, my Rack::Test patch fixes the "outside of EventMachine" errors. You must be in the __test__ environment so that Sinatra will not load Rack::FiberPool. My patch admittedly needs some work.
 
 Benchmarks
 ---
