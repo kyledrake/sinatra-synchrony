@@ -3,7 +3,7 @@ Sinatra::Synchrony
 
 Sinatra + EM-Synchrony - fast, concurrent web applications with no callbacks!
 
-Sinatra::Synchrony is an extension for Sinatra that dramatically improves the concurrency of your web application. Powered by [EventMachine](https://github.com/eventmachine/eventmachine) and [EM-Synchrony](https://github.com/igrigorik/em-synchrony), it increases the number of clients your application can serve per process when you have a lot of slow IO calls (like HTTP calls to external APIs). Because it uses [Fibers](http://www.ruby-doc.org/core-1.9/classes/Fiber.html) internally to handle concurrency, no callback gymnastics are required! Just develop as if you were writing a normal Sinatra web application, use non-blocking libraries (see below) and you're all set!
+Sinatra::Synchrony is a very small extension for Sinatra that dramatically improves the concurrency of your web application. Powered by [EventMachine](https://github.com/eventmachine/eventmachine) and [EM-Synchrony](https://github.com/igrigorik/em-synchrony), it increases the number of clients your application can serve per process when you have a lot of slow IO calls (like HTTP calls to external APIs). Because it uses [Fibers](http://www.ruby-doc.org/core-1.9/classes/Fiber.html) internally to handle concurrency, no callback gymnastics are required! Just develop as if you were writing a normal Sinatra web application, use non-blocking libraries (see below) and you're all set!
 
 How it works
 ---
@@ -44,7 +44,7 @@ One important thing: __do not use Sinatra's internal session code__. So no "enab
 Tests
 ---
 
-Just write your tests as usual, and they will be run within an EventMachine reactor. You must be in the __test__ environment so that Sinatra will no load Rack::FiberPool during testing.
+Just write your tests as usual, my Rack::Test patch fixes the "outside of EventMachine" errors. You must be in the __test__ environment so that Sinatra will not load Rack::FiberPool.
 
 Benchmarks
 ---
