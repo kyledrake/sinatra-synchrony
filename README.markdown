@@ -94,6 +94,7 @@ For a perspective, this operation takes __33 seconds__ without this extension. T
 
 TODO / Thoughts
 ---
+* This is fairly alpha. Please test before deploying to production.
 * Provide better method for patching Rack::Test that's less fragile to version changes. This is a big priority and I intend to improve this. Pull requests here welcome!
 * Research way to run tests with Rack::FiberPool enabled.
 
