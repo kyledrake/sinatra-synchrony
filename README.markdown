@@ -51,6 +51,7 @@ Benchmarks
 It's pretty fast!
 
     class App < Sinatra::Base
+      register Sinatra::Synchrony
       get '/' do
         'Hello World!'
       end
