@@ -1,7 +1,9 @@
 Sinatra::Synchrony
 ===
 
-Sinatra::Synchrony is a glue extension for Sinatra that dramatically improves the concurrency of your web application. It increases the number of clients your application can serve per process when you have a lot of slow IO calls (like HTTP calls to external APIs). Because it uses [Fibers](http://www.ruby-doc.org/core-1.9/classes/Fiber.html) internally to handle concurrency, no callback gymnastics are required! Just develop as if you were writing a normal Sinatra web application, use non-blocking libraries (see below) and you're all set!
+Sinatra + EM-Synchrony - fast, concurrent web applications with no callbacks!
+
+Sinatra::Synchrony is an extension for Sinatra that dramatically improves the concurrency of your web application. Powered by [EventMachine](https://github.com/eventmachine/eventmachine) and [EM-Synchrony](https://github.com/igrigorik/em-synchrony), it increases the number of clients your application can serve per process when you have a lot of slow IO calls (like HTTP calls to external APIs). Because it uses [Fibers](http://www.ruby-doc.org/core-1.9/classes/Fiber.html) internally to handle concurrency, no callback gymnastics are required! Just develop as if you were writing a normal Sinatra web application, use non-blocking libraries (see below) and you're all set!
 
 How it works
 ---
@@ -43,6 +45,52 @@ Tests
 ---
 
 Just write your tests as usual, and they will be run within an EventMachine reactor. You must be in the __test__ environment so that Sinatra will no load Rack::FiberPool during testing.
+
+Benchmarks
+---
+It's pretty fast!
+
+    class App < Sinatra::Base
+      get '/' do
+        'Hello World!'
+      end
+    end
+
+run with rackup -s thin:
+
+    $ ab -c 50 -n 2000 http://127.0.0.1:9292/
+    ...
+    Requests per second:    3102.30 [#/sec] (mean)
+    Time per request:       16.117 [ms] (mean)
+    Time per request:       0.322 [ms] (mean, across all concurrent requests)
+
+    Connection Times (ms)
+                  min  mean[+/-sd] median   max
+    Connect:        0    0   0.1      0       1
+    Processing:     5   16   7.7     13      38
+    Waiting:        3   13   7.0     10      35
+    Total:          6   16   7.7     13      38
+
+Let's try a simple blocking IO example to prove it works. 100 hits to google.com:
+
+    require 'rest-client'
+    
+    class App < Sinatra::Base
+      register Sinatra::Synchrony
+      get '/' do
+        # Using EventMachine::HttpRequest
+        # EM::Synchrony.sync(EventMachine::HttpRequest.new('http://google.com').get).response
+
+        # Using RestClient, which gets concurrency via patched TCPSocket, no changes required!
+        RestClient.get 'http://google.com'
+      end 
+    end
+
+    $ ab -c 100 -n 100 http://127.0.0.1:9292/
+    ...
+    Time taken for tests:   1.270 seconds
+    
+For a perspective, this operation takes __33 seconds__ without this extension. That's __26x__ faster!
 
 TODO / Thoughts
 ---
