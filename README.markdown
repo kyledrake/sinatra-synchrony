@@ -1,12 +1,12 @@
 Sinatra::Synchrony
 ===
 
-Sinatra::Synchrony is an extension for Sinatra that enables full asynchronous concurrency with [EventMachine](https://github.com/eventmachine/eventmachine) and [EM-Synchrony](https://github.com/igrigorik/em-synchrony). It dramatically increases the number of clients your application can serve per process, especially when you have a lot of slow IO calls (like HTTP calls to external APIs). Because it uses [Fibers](http://www.ruby-doc.org/core-1.9/classes/Fiber.html) internally to handle concurrency, you don't have to use callbacks, and can continue to program synchronously, the same way you always did.. the concurrency gymnastics are handled behind the scenes for you! No configuration is necessary.. just drop it in, use non-blocking libraries (see below) and you're all set!
+Sinatra::Synchrony is a glue extension for Sinatra that enables full asynchronous concurrency with [EventMachine](https://github.com/eventmachine/eventmachine) and [EM-Synchrony](https://github.com/igrigorik/em-synchrony). It dramatically increases the number of clients your application can serve per process when you have a lot of slow IO calls (like HTTP calls to external APIs). Because it uses [Fibers](http://www.ruby-doc.org/core-1.9/classes/Fiber.html) internally to handle concurrency, no callback gymnastics are required! Just develop as if you were writing a normal Sinatra web application, use non-blocking libraries (see below) and you're all set!
 
 How it works
 ---
 
-* Loads [EventMachine](https://github.com/eventmachine/eventmachine) and [EM-Synchrony](https://github.com/igrigorik/em-synchrony). Requires app server with EventMachine and Ruby 1.9 support (Thin and Rainbows!).
+* Loads [EventMachine](https://github.com/eventmachine/eventmachine) and [EM-Synchrony](https://github.com/igrigorik/em-synchrony). Requires app server with EventMachine and Ruby 1.9 support (Thin, Rainbows!, Heroku).
 * Inserts the [Rack::FiberPool](https://github.com/mperham/rack-fiber_pool) middleware, which automatically provides a Fiber for each incoming request, allowing EM-Synchrony to work.
 * Inserts [async-rack](https://github.com/rkh/async-rack/tree/master/lib/async_rack), which makes Rack's middleware more async friendly.
 * Adds [em-http-request](https://github.com/igrigorik/em-http-request), which you can use with EM::Synchrony to do concurrent HTTP calls to APIs! Or if you'd rather use a different client:
@@ -39,7 +39,23 @@ One important thing: __do not use Sinatra's internal session code__. So no "enab
       use Rack::Session::Cookie, :secret => 'CHANGE ME TO SOMETHING!'
     end
 
-Credits
+Tests
+---
+
+Just write your tests as usual, and they will be run within an EventMachine reactor. You must be in the __test__ environment so that Sinatra will no load Rack::FiberPool during testing.
+
+TODO / Thoughts
+---
+* Provide better method for patching Rack::Test that's less fragile to version changes. This is a big priority and I intend to improve this. Pull requests here welcome!
+* Research way to run tests with Rack::FiberPool enabled.
+
+Author
 ---
 * [Kyle Drake](http://kyledrake.net)
-More to come!
+
+Thanks
+---
+* [Ilya Grigorik](http://www.igvita.com) and [PostRank](http://www.postrank.com) for their amazing work on em-synchrony, em-http-request, and countless articles explaining this.
+* [Mike Perham](http://www.mikeperham.com) and [Carbon Five](http://carbonfive.com). For rack-fiber_pool, em-resolv-replace, and many blog posts and presentations on this.
+* [Konstantin Haase](http://rkh.im/) for async-rack and his many contributions to Sinatra.
+* The many developers that helped Sinatra and EventMachine become a real force for concurrent programming.
