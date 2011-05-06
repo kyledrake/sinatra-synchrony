@@ -1,3 +1,7 @@
+## Announcement ##
+
+**There is work underway to make this a Rack middleware, and integrate that middleware with this plugin. That way, many other frameworks can take advantage of this. There is also work underway to provide support for non-EventMachine Reactor pattern implementations with this approach. Stay tuned, amazing stuff coming very soon!**
+
 Sinatra::Synchrony
 ===
 
