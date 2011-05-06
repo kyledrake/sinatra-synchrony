@@ -1,6 +1,5 @@
 require 'sinatra/base'
 require 'rack/fiber_pool'
-require 'async-rack'
 require 'eventmachine'
 require 'em-http-request'
 require 'em-synchrony'

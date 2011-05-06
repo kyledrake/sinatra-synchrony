@@ -10,7 +10,6 @@ How it works
 
 * Loads [EventMachine](https://github.com/eventmachine/eventmachine) and [EM-Synchrony](https://github.com/igrigorik/em-synchrony). Requires app server with EventMachine and Ruby 1.9 support (Thin, Rainbows!, Heroku).
 * Inserts the [Rack::FiberPool](https://github.com/mperham/rack-fiber_pool) middleware, which automatically provides a Fiber for each incoming request, allowing EM-Synchrony to work.
-* Inserts [async-rack](https://github.com/rkh/async-rack/tree/master/lib/async_rack), which makes Rack's middleware more async friendly.
 * Adds [em-http-request](https://github.com/igrigorik/em-http-request), which you can use with EM::Synchrony to do concurrent HTTP calls to APIs! Or if you'd rather use a different client:
 * Patches TCPSocket via EM-Synchrony. Any software that uses this (such as an HTTP Client that uses Net::HTTP) can run without blocking IO. [RestClient](https://github.com/archiloque/rest-client) works great with this!
 * Patches Rack::Test so that it runs your tests within an EventMachine. Just test the same way you did before and it should just work.
@@ -108,4 +107,5 @@ Thanks
 * [Ilya Grigorik](http://www.igvita.com) and [PostRank](http://www.postrank.com) for their amazing work on em-synchrony, em-http-request, and countless articles explaining this.
 * [Mike Perham](http://www.mikeperham.com) and [Carbon Five](http://carbonfive.com). For rack-fiber_pool, em-resolv-replace, and many blog posts and presentations on this.
 * [Konstantin Haase](http://rkh.im/) for async-rack and his many contributions to Sinatra.
+* [Steeve Morin](http://github.com/steeve)
 * The many Sinatra developers that liberated me from framework hell, and EventMachine developers that liberated me from blocking IO hell.
