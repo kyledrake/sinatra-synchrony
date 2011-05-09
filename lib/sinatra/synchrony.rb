@@ -13,8 +13,9 @@ $VERBOSE = original_verbosity
 
 module Sinatra
   module Synchrony
-    def self.registered(app)
-      app.use Rack::FiberPool unless app.test?
+    def setup_sessions(builder)
+      builder.use Rack::FiberPool unless test?
+      super
     end
   end
   register Synchrony

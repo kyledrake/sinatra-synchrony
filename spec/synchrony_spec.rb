@@ -17,7 +17,7 @@ describe 'A mock app' do
   include Rack::Test::Methods
   it 'successfully completes a sleep call' do
     mock_app {
-      get '/?' do
+      get '/' do
         EM::Synchrony.sleep(0.0001)
         'ok'
       end
@@ -25,5 +25,19 @@ describe 'A mock app' do
     get '/'
     expect { last_response.ok? }
     expect { last_response.body == 'ok' }
+  end
+
+  it 'works with cookie' do
+    mock_app {
+      set :session_secret, 'secret'
+      enable :sessions
+      get '/' do
+        session[:key] = 'val'
+        'ok'
+      end
+    }
+    get '/'
+    expect { last_response.ok? }
+    expect { last_response.headers['Set-Cookie'] }
   end
 end

@@ -32,16 +32,19 @@ Install the gem:
 
 Register with Sinatra __at the top, before any other middleware or plugins are loaded__:
 
+    require 'sinatra/base'
     require 'sinatra/synchrony'
     class App < Sinatra::Base
       register Sinatra::Synchrony
     end
-    
-One important thing: __do not use Sinatra's internal session code__. So no "enable :sessions". Instead, enable the sessions directly via the [Rack::Session::Cookie](http://rack.rubyforge.org/doc/classes/Rack/Session/Cookie.html) middleware (there is no consequence to doing this, Sinatra does the same thing under the hood.. it just does it in the wrong load order):
 
-    class App < Sinatra::Base
-      register Sinatra::Synchrony
-      use Rack::Session::Cookie, :secret => 'CHANGE ME TO SOMETHING!'
+If you are developing with a classic style app, just require the gem and it will automatically load:
+
+    require 'sinatra'
+    require 'sinatra/synchrony'
+    
+    get '/' do
+      'Sinatra::Synchrony is loaded automatically in classic mode, nothing needed'
     end
 
 Tests
