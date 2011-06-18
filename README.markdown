@@ -95,9 +95,13 @@ Let's try a simple blocking IO example to prove it works. 100 hits to google.com
     
 For a perspective, this operation takes __33 seconds__ without this extension. That's __26x__ faster!
 
+Geoloqi
+---
+This gem was designed to help us develop faster games and internal applications for [Geoloqi](http://geoloqi.org): a private, real-time mobile and web platform for securely location data. We wanted to share with you how we deal with concurrency issues, and also make it easy to utilize this for our other projects. One of these projects is our recently released [Geoloqi ruby adapter](http://github.com/kyledrake/geoloqi-ruby), which utilizes [Faraday](http://github.com/technoweenie/faraday) and sinatra-synchrony to provide massive concurrency with almost no changes required to your code. Geoloqi is production ready right now, and we have a lot of major features and enhancements in store for this summer. Keep an eye on us! We won't disappoint.
+
 TODO / Thoughts
 ---
-* This is fairly alpha. Please test before deploying to production.
+* This is fairly new, though we are using it in production without any problems. Test before deploying anything with it.
 * Provide better method for patching Rack::Test that's less fragile to version changes. This is a big priority and I intend to improve this. Pull requests here welcome!
 * Research way to run tests with Rack::FiberPool enabled.
 * There is work underway to make this a Rack middleware, and integrate that middleware with this plugin. That way, many other frameworks can take advantage of this. There is also work exploratory work to provide support for non-EventMachine Reactor pattern implementations with this approach, but it's beyond the scope of this extension.
