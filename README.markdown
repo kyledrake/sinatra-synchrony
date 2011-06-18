@@ -97,7 +97,7 @@ For a perspective, this operation takes __33 seconds__ without this extension. T
 
 Geoloqi
 ---
-This gem was designed to help us develop faster games and internal applications for [Geoloqi](http://geoloqi.org): a private, real-time mobile and web platform for securely location data. We wanted to share with you how we deal with concurrency issues, and also make it easy to utilize this for our other projects. One of these projects is our recently released [Geoloqi ruby adapter](http://github.com/kyledrake/geoloqi-ruby), which utilizes [Faraday](http://github.com/technoweenie/faraday) and sinatra-synchrony to provide massive concurrency with almost no changes required to your code. Geoloqi is production ready right now, and we have a lot of major features and enhancements in store for this summer. Keep an eye on us! We won't disappoint.
+This gem was designed to help us develop faster games and internal applications for [Geoloqi](http://geoloqi.org): a private, real-time mobile and web platform for securely sharing location data. We wanted to share with you how we deal with concurrency issues, and also make it easy to utilize this for our other projects. One of these projects is our recently released [Geoloqi ruby adapter](http://github.com/kyledrake/geoloqi-ruby), which utilizes [Faraday](http://github.com/technoweenie/faraday) and sinatra-synchrony to provide massive concurrency with almost no changes required to your code. Geoloqi is production ready right now, and we have a lot of major features and enhancements in store for this summer. Keep an eye on us! We won't disappoint.
 
 TODO / Thoughts
 ---
