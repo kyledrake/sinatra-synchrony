@@ -6,11 +6,6 @@ require 'em-synchrony'
 require 'em-resolv-replace'
 require 'net/http'
 
-original_verbosity = $VERBOSE
-$VERBOSE = nil
-TCPSocket = EventMachine::Synchrony::TCPSocket
-$VERBOSE = original_verbosity
-
 module Sinatra
   module Synchrony
     def setup_sessions(builder)
