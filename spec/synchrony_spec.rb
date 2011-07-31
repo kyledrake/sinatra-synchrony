@@ -1,8 +1,9 @@
 ENV['RACK_ENV'] = 'test'
 require File.join(File.join(File.expand_path(File.dirname(__FILE__))), '..', 'lib', 'sinatra', 'synchrony')
-require File.join(File.join(File.expand_path(File.dirname(__FILE__))), '..', 'lib', 'rack', 'test_synchrony')
+require 'rack/test'
 require 'minitest/autorun'
 require 'wrong/adapters/minitest'
+Sinatra::Synchrony.patch_tests!
 Wrong.config.alias_assert :expect
 
 def mock_app(base=Sinatra::Base, &block)

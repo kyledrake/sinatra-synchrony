@@ -43,10 +43,27 @@ If you are developing with a classic style app, just require the gem and it will
       'Sinatra::Synchrony is loaded automatically in classic mode, nothing needed'
     end
 
+Net::HTTP / TCPSocket
+---
+If you're using anything based on TCPSocket (such as Net::HTTP, which is used by many things), you can replace the native Ruby TCPSocket with one that supports EventMachine and allows for concurrency:
+
+    Sinatra::Synchrony.patch_tcpsocket!
+
+This will allow you to use things like [RestClient](https://github.com/archiloque/rest-client) without any changes:
+
+    RestClient.get 'http://google.com'
+
+This is not perfect though - the TCPSocket overload doesn't currently support SSL and will throw an exception. This is more for when you have ruby libraries that use Net::HTTP and you want to try something. If you intend to do HTTP requests, I strongly recommend using [Faraday](https://github.com/technoweenie/faraday) instead, which has support for [EM-HTTP-Request](https://github.com/igrigorik/em-http-request).
+
+Please encourage Ruby library developers to use (or at least support) Faraday instead of Net::HTTP. Aside from the inability to be concurrent natively, it's a pretty weird and crappy interface, which makes it harder to replace it with something better.
+
 Tests
 ---
+Add this to the top of your test file:
 
-Just write your tests as usual, my Rack::Test patch fixes the "outside of EventMachine" errors. You must be in the __test__ environment so that Sinatra will not load Rack::FiberPool. My patch admittedly needs some work.
+    Sinatra::Synchrony.patch_tests!
+
+Then just write your tests as usual, and all tests will be run within EventMachine. You must be in the __test__ environment so that Sinatra will not load Rack::FiberPool.
 
 Benchmarks
 ---
