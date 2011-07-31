@@ -17,7 +17,7 @@ module Sinatra
         require 'sinatra/synchrony/mock_session'
       end
 
-      def patch_tcpsocket!
+      def overload_tcpsocket!
         require 'sinatra/synchrony/tcpsocket'
       end
     end

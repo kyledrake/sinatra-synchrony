@@ -47,7 +47,7 @@ Net::HTTP / TCPSocket
 ---
 If you're using anything based on TCPSocket (such as Net::HTTP, which is used by many things), you can replace the native Ruby TCPSocket with one that supports EventMachine and allows for concurrency:
 
-    Sinatra::Synchrony.patch_tcpsocket!
+    Sinatra::Synchrony.overload_tcpsocket!
 
 This will allow you to use things like [RestClient](https://github.com/archiloque/rest-client) without any changes:
 
@@ -67,7 +67,7 @@ Then just write your tests as usual, and all tests will be run within EventMachi
 
 Benchmarks
 ---
-It's pretty fast!
+Despite enabling synchronous programming without callbacks, there is no performance hit to your application! All the performance benefits you expect from Thin/Rainbows and EventMachine are still there:
 
     class App < Sinatra::Base
       register Sinatra::Synchrony
@@ -76,7 +76,7 @@ It's pretty fast!
       end
     end
 
-run with rackup -s thin:
+Benchmarked with rackup -s thin:
 
     $ ab -c 50 -n 2000 http://127.0.0.1:9292/
     ...
@@ -93,24 +93,22 @@ run with rackup -s thin:
 
 Let's try a simple blocking IO example to prove it works. 100 hits to google.com:
 
+    require 'sinatra'
+    require 'sinatra/synchrony'
     require 'rest-client'
-    
-    class App < Sinatra::Base
-      register Sinatra::Synchrony
-      get '/' do
-        # Using EventMachine::HttpRequest
-        # EM::Synchrony.sync(EventMachine::HttpRequest.new('http://google.com').get).response
+    require 'faraday'
+    Faraday.default_adapter = :em_synchrony
 
-        # Using RestClient, which gets concurrency via patched TCPSocket, no changes required!
-        RestClient.get 'http://google.com'
-      end 
+    get '/' do
+      Faraday.get 'http://google.com'
     end
+
 
     $ ab -c 100 -n 100 http://127.0.0.1:9292/
     ...
-    Time taken for tests:   1.270 seconds
-    
-For a perspective, this operation takes __33 seconds__ without this extension. That's __26x__ faster!
+    Time taken for tests:   0.256 seconds
+
+For a perspective, this operation takes __33 seconds__ without this extension.
 
 Geoloqi
 ---
