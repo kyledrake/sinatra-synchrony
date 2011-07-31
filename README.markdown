@@ -118,9 +118,7 @@ This gem was designed to help us develop faster games and internal applications 
 
 TODO / Thoughts
 ---
-* This is fairly new, though we are using it in production without any problems. Test before deploying anything with it.
-* Provide better method for patching Rack::Test that's less fragile to version changes. This is a big priority and I intend to improve this. Pull requests here welcome!
-* Research way to run tests with Rack::FiberPool enabled.
+* We are using this in production without any problems, and it's very stable for us. But you should test before deploying anything with it.
 * There is work underway to make this a Rack middleware, and integrate that middleware with this plugin. That way, many other frameworks can take advantage of this. There is also work exploratory work to provide support for non-EventMachine Reactor pattern implementations with this approach, but it's beyond the scope of this extension.
 
 Author
