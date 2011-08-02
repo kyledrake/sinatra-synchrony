@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'em-http-request',   '= 0.3.0'
   s.add_dependency 'em-synchrony',      '= 0.2.0'
   s.add_dependency 'em-resolv-replace', '= 1.1.1'
+  s.add_dependency 'async-rack',        '>= 0'
 
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rack-test', '= 0.5.7'
