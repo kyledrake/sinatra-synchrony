@@ -129,4 +129,5 @@ Thanks
 * [Mike Perham](http://www.mikeperham.com) and [Carbon Five](http://carbonfive.com). For rack-fiber_pool, em-resolv-replace, and many blog posts and presentations on this.
 * [Konstantin Haase](http://rkh.im/) for session overload suggestion.
 * [Steeve Morin](http://github.com/steeve)
+* [Ryan Caught](https://github.com/rcaught)
 * The many Sinatra developers that liberated me from framework hell, and EventMachine developers that liberated me from blocking IO hell.
