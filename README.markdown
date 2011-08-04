@@ -1,4 +1,4 @@
-Sinatra::Synchrony
+Sinatra::Synchrony [![](https://secure.travis-ci.org/kyledrake/sinatra-synchrony.png)](http://travis-ci.org/kyledrake/sinatra-synchrony)
 ===
 
 Sinatra + EM-Synchrony - fast, concurrent web applications with no callbacks!
