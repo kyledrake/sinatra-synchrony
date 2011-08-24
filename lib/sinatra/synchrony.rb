@@ -9,8 +9,21 @@ require 'async-rack'
 module Sinatra
   module Synchrony
     def setup_sessions(builder)
-      builder.use Rack::FiberPool unless test?
+      builder.use Rack::FiberPool, {:rescue_exception => handle_exception } unless test?
       super
+    end
+
+    def handle_exception
+      Proc.new do |env, e|
+        if settings.show_exceptions?
+          request = Sinatra::Request.new(env)
+          printer = Sinatra::ShowExceptions.new(proc{ raise e })
+          s, h, b = printer.call(env)
+          [s, h, b]
+        else
+          [500, {}, ""]
+        end
+      end
     end
 
     class << self
