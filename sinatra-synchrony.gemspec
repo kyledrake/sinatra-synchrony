@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.email = ['kyledrake@gmail.com']
   s.homepage = 'https://github.com/kyledrake/sinatra-synchrony'
   s.summary = 'Bootstraps Sinatra with EM-Synchrony code, make TCPSocket EM-aware, provides support for tests'
-  s.description = 'Bootstraps in code required to take advantage of EventMachine/EM-Synchrony\'s concurrency enhancements for slow IO. Patches TCPSocket, which makes anything based on it EM-aware (including RestClient). Includes patch for tests. Requires ruby 1.9.'
+  s.description = 'Bootstraps in code required to take advantage of EventMachine/EM-Synchrony\'s concurrency enhancements for slow IO. Patches TCPSocket, which makes anything based on it EM-aware (including RestClient). Includes patch for tests. Requires Fibers (Ruby 1.9, JRuby and Rubinius in 1.9 mode)'
 
   s.files = Dir['{lib/sinatra,lib/rack,spec}/**/*'] + Dir['[A-Z]*']
   s.require_path = 'lib'
