@@ -45,9 +45,7 @@ describe 'A mock app' do
   it 'logs' do
     mock_app {
       enable :logging
-      get '/' do
-        'ok'
-      end
+      get('/') {}
     }
     get '/'
     deny { last_response.errors.empty? }
