@@ -4,7 +4,6 @@ require 'eventmachine'
 require 'em-http-request'
 require 'em-synchrony'
 require 'em-resolv-replace'
-require 'async-rack'
 
 module Sinatra
   module Synchrony
