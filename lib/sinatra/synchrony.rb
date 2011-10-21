@@ -7,6 +7,10 @@ require 'em-resolv-replace'
 
 module Sinatra
   module Synchrony
+    def self.registered(app)
+      app.disable :threaded
+    end
+
     def setup_sessions(builder)
       builder.use Rack::FiberPool, {:rescue_exception => handle_exception } unless test?
       super
