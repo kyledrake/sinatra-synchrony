@@ -1,0 +1,32 @@
+.masthead {
+  padding-top: 70px;
+}
+
+.masthead h1 {
+  font-size: 4em;
+}
+
+.container section {
+  padding-top: 40px;
+}
+
+.masthead .lead {
+  font-size: 2em;
+}
+
+.info {
+  margin-top: 10px;
+}
+
+.info li {
+  color: #404040;
+  margin-bottom: 10px;
+}
+
+.container section {
+  margin-top: 20px;
+}
+
+.last {
+  margin-bottom: 75px;
+}
