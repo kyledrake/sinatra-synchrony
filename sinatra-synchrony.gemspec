@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'sinatra-synchrony'
-  s.version = '0.4.0'
+  s.version = '0.4.1'
   s.authors = ['Kyle Drake']
   s.email = ['kyledrake@gmail.com']
   s.homepage = 'https://github.com/kyledrake/sinatra-synchrony'
@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version =         '>= 1.3.4'
   s.add_dependency 'sinatra',           '~> 1.0'
   s.add_dependency 'rack-fiber_pool',   '~> 0.9'
-  s.add_dependency 'eventmachine',      '~> 1.0.0.rc.4'
+  s.add_dependency 'eventmachine',      '~> 1.0.0'
   s.add_dependency 'em-http-request',   '~> 1.0'
   s.add_dependency 'em-synchrony',      '~> 1.0.1'
   s.add_dependency 'em-resolv-replace', '~> 1.1'
