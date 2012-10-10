@@ -24,7 +24,7 @@ module Sinatra
           s, h, b = printer.call(env)
           [s, h, b]
         else
-          [500, {}, ""]
+          [500, {}, [""]]
         end
       end
     end
