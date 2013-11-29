@@ -1,3 +1,9 @@
+# NOTICE: sinatra-synchrony is obsolete.
+
+This gem should not be considered for a new application. It is better to use threads with Ruby, rather than EventMachine. It also tends to break when new releases of ruby come out, and EM itself is not maintained very well and has some pretty fundamental problems.
+
+I will not be maintaining this gem anymore. If anyone is interested in maintaining it, feel free to inquire, but I recommend not using EventMachine or sinatra-synchrony anymore.
+
 Sinatra::Synchrony [![](https://secure.travis-ci.org/kyledrake/sinatra-synchrony.png)](http://travis-ci.org/kyledrake/sinatra-synchrony)
 ===
 
