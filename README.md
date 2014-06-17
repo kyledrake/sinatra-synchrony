@@ -1,4 +1,4 @@
-# NOTICE: sinatra-synchrony is obsolete.
+# If you are looking for a similar solution, check out [Angelo](https://github.com/kenichi/angelo), which is similar to Sinatra but uses Celluloid, Celluloid::IO, Reel, and doesn't compromise real threads or require stupid EM monkey patches. This is a way, way, way better solution than sinatra-synchrony, rack, or EM will ever be.
 
 This gem should not be considered for a new application. It is better to use threads with Ruby, rather than EventMachine. It also tends to break when new releases of ruby come out, and EM itself is not maintained very well and has some pretty fundamental problems.
 
