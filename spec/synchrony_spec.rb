@@ -41,4 +41,13 @@ describe 'A mock app' do
     expect { last_response.ok? }
     expect { last_response.headers['Set-Cookie'] }
   end
+
+  it 'logs' do
+    mock_app {
+      enable :logging
+      get('/') {}
+    }
+    get '/'
+    deny { last_response.errors.empty? }
+  end
 end
